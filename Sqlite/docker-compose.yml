@@ -1,0 +1,17 @@
+version: "3"
+#  docker-compose up -d
+#  Terminal access: 
+#     docker-compose exec sqlite3 bash
+#  Then:
+#     sqlite3 test.db
+#     create table work (person text not null, job text not null);
+#     insert into work values ('mik', 'calibrate'), ('mik', 'clean'), ('mik', 'complain'), ('po', 'clean'), ('po', 'complain'), ('tay', 'complain');
+#  Or call sqlite3 directly:
+#     docker-compose exec sqlite3 sqlite3
+services:
+  sqlite3:
+    image: nouchka/sqlite3:latest
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./db/:/root/db/

@@ -1,0 +1,16 @@
+version: '3'
+#  docker-compose up -d
+#  Browser: http://localhost:8080
+#  Terminal access: 
+#     docker-compose exec nocodb bash
+#
+#  Within Nocodb: Create new sqlite db always with full path! "/usr/app/data/test.db"
+#
+services: 
+  nocodb: 
+    image: "nocodb/nocodb:latest"
+    ports: 
+      - "8080:8080"
+    restart: always
+    volumes: 
+      - "./nc_data:/usr/app/data/"

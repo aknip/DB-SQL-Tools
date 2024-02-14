@@ -1,0 +1,26 @@
+version: "3"
+#  docker-compose up -d
+#  Browser: http://localhost:8080
+#  Terminal access: 
+#     docker-compose exec postgres bash
+#     docker-compose exec appsmith bash
+services:
+    appsmith:
+        image: index.docker.io/appsmith/appsmith-ee
+        container_name: appsmith
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./stacks:/appsmith-stacks
+        restart: unless-stopped
+    postgres:
+        image: postgres:14-alpine
+        ports:
+            - 21003:5432
+        volumes:
+            - ./postgres:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=secret
+            - POSTGRES_USER=demo_user
+            - POSTGRES_DB=demo_db

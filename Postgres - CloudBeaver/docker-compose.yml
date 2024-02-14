@@ -1,0 +1,23 @@
+version: "3"
+#  docker-compose up -d
+#  Browser: http://localhost:5021
+#  Terminal access: docker-compose exec postgres bash
+services:
+    postgres:
+        image: postgres:14-alpine
+        ports:
+            - 5432:5432
+        volumes:
+            - ./postgres:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=secret
+            - POSTGRES_USER=demo_user
+            - POSTGRES_DB=demo_db
+    dbeaver:
+        image: dbeaver/cloudbeaver:23.3.4
+        container_name: CloudBeaver
+        restart: unless-stopped
+        volumes:
+          - ./dbeaver-data:/opt/cloudbeaver/workspace
+        ports:
+          - 5021:8978

@@ -1,0 +1,18 @@
+version: "3.4"
+#  docker-compose up -d
+#  Browser: http://localhost
+#  Terminal access: 
+#     docker-compose exec baserow bash
+services:
+  baserow:
+    container_name: baserow
+    image: baserow/baserow:1.22.3
+    environment:
+      BASEROW_PUBLIC_URL: 'http://localhost'
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - baserow_data:/baserow/data
+volumes:
+  baserow_data:

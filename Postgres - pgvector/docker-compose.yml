@@ -1,0 +1,29 @@
+version: "3"
+#  docker-compose up -d
+#  Browser: http://localhost:5021
+#  Terminal access: docker-compose exec postgres bash
+#
+#  see https://medium.com/@johannes.ocean/setting-up-a-postgres-database-with-the-pgvector-extension-10ab7ff212cc
+#      and https://github.com/johannesocean/pgvector-demo
+#
+services:
+    postgres:
+        image: ankane/pgvector
+        ports:
+            - 5432:5432
+        volumes:
+            - ./postgres:/var/lib/postgresql/data
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        environment:
+            - POSTGRES_DB=vectordb
+            - POSTGRES_USER=testuser
+            - POSTGRES_PASSWORD=testpwd
+            - POSTGRES_HOST_AUTH_METHOD=trust
+    dbeaver:
+        image: dbeaver/cloudbeaver:23.3.4
+        container_name: CloudBeaver
+        restart: unless-stopped
+        volumes:
+          - ./dbeaver-data:/opt/cloudbeaver/workspace
+        ports:
+          - 5021:8978

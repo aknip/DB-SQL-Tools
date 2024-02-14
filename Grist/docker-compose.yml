@@ -1,0 +1,16 @@
+version: "3.9"
+#  docker-compose up -d
+#  Browser: hhttp://localhost
+#  Terminal access: 
+#     docker-compose exec grist bash
+#  Change port and OpenAPI key / local llama-ccp-model in file grist.env
+services:
+  grist:
+    image: "gristlabs/grist:latest"
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    env_file:
+      - "./grist.env"
+    volumes:
+      - "./data:/persist"
