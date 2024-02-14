@@ -1,0 +1,30 @@
+# start browser: 
+# http://localhost:8080 => wordpress/wordpress
+
+version: '3.6'
+
+services:
+    db:
+        image: mysql:8.3.0 # mysql:latest 
+        volumes:
+          - ./mysql:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: mypassword
+            MYSQL_DATABASE: wordpress
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: wordpress
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        environment:
+          PMA_HOST: db
+          PMA_PORT: 3306
+          MYSQL_ROOT_PASSWORD: mypassword
+        ports:
+          - ${IP}:8080:80
+        links:
+          - db:db
+
+volumes:
+    mysql:
