@@ -1,0 +1,10 @@
+services:  
+  outerbase:
+    #platform: linux/x86_64
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - 7654:3000
+    
